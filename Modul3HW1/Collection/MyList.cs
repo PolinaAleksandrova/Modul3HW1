@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Modul3HW1.Collection
 {
-    public class MyList<T> : IEnumerable<T>, IComparer
+    public class MyList<T> : IEnumerable<T>
     {
         private int _count;
         private T[] _finalArray;
@@ -25,18 +25,6 @@ namespace Modul3HW1.Collection
             }
         }
 
-        public T this[int index]// индексатор
-        {
-            get
-            {
-                return _finalArray[index];
-            }
-            set
-            {
-                _finalArray[index] = value;
-            }
-        }
-
         public void Add(T itemToAdd)
         {
             CreateExtraArray(1);
@@ -44,37 +32,29 @@ namespace Modul3HW1.Collection
             _count++;
         }
 
-        public int CompareTo(MyList<T> other)
+        public void Sort(IComparer comparer)
         {
-            if (Count == other.Count)
-            {
-                return 0;
-            }
-            else if (Count < other.Count)
-            {
-                return -1;
-            }
-            else
-            {
-                return 1;
-            }
-        }
+            int ind = -1;
 
-        public T[] Sort()
-        {
-            for (var i = 0; i < _count; i++)
+            for (int i = 0; i < _count; i++)
             {
-                for (var j = i + 1; j < _count; j++)
+                if (_finalArray[i] != null)
                 {
-                    if (_finalArray[i] > _finalArray[j])
-                    {
-
-
-                    }
+                    ind = i;
+                    break;
                 }
-
             }
+
+            T[] arrayForSort = new T[_count - ind];
+
+            for (int i = 0; i < _count - ind; i++)
+            {
+                arrayForSort[i] = _finalArray[ind + i];
+            }
+
+            Array.Sort(arrayForSort, comparer);
         }
+
         public void CreateExtraArray(int length)
         {
             if (_count + length < _finalArray.Length)
