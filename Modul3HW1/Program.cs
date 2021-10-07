@@ -21,8 +21,8 @@ namespace Modul3HW1
             list.Add(4);
             list.Add(5);
             list.Remove(2);
-            list.RemoveAt(11);
             list.Sort(_comparer);
+            list.RemoveAt(1);
         }
     }
 }

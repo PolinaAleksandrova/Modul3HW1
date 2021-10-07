@@ -56,25 +56,7 @@ namespace Modul3HW1.Collection
 
         public void Sort(IComparer comparer)
         {
-            int ind = -1;
-
-            for (int i = 0; i < _count; i++)
-            {
-                if (_finalArray[i] != null)
-                {
-                    ind = i;
-                    break;
-                }
-            }
-
-            T[] arrayForSort = new T[_count - ind];
-
-            for (int i = 0; i < _count - ind; i++)
-            {
-                arrayForSort[i] = _finalArray[ind + i];
-            }
-
-            Array.Sort(arrayForSort, comparer);
+            Array.Sort(_finalArray, comparer);
         }
 
         public void CreateExtraArray(int length)
