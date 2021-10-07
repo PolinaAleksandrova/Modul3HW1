@@ -11,6 +11,7 @@ namespace Modul3HW1.Collection
     {
         private int _count;
         private T[] _finalArray;
+        private int _counter;
 
         public MyList()
         {
@@ -25,11 +26,32 @@ namespace Modul3HW1.Collection
             }
         }
 
-        public void Add(T itemToAdd)
+        public T this[int index]
         {
-            CreateExtraArray(1);
-            _finalArray[_count] = itemToAdd;
-            _count++;
+            get
+            {
+                return _finalArray[index];
+            }
+
+            set
+            {
+                _finalArray[index] = value;
+            }
+        }
+
+        public void Add(T value)
+        {
+            T[] tempArray = new T[_finalArray.Length + 1];
+            _counter++;
+
+            for (int index = 0; index < _finalArray.Length; index++)
+            {
+                tempArray[index] = _finalArray[index];
+            }
+
+            tempArray[tempArray.Length - 1] = value;
+
+            _finalArray = tempArray;
         }
 
         public void Sort(IComparer comparer)
